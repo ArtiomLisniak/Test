@@ -6,7 +6,7 @@ $tri=strlen('три');
 $a = 125*13+7;
 $b = 223+28*2;
 $databasearray= array('three','три');
-$lengths = array_map('strlen', $databasearray);
+$lengths = array_map('mb_strlen', $databasearray);
 $maxlength = max($lengths);
 $index=array_search($maxlength, $lengths);
 
