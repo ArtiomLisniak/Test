@@ -5,6 +5,10 @@ $three=strlen('three');
 $tri=strlen('три');
 $a = 125*13+7;
 $b = 223+28*2;
+$databasearray= array('three','три');
+$lengths = array_map('strlen', $databasearray);
+$maxlength = max($lengths);
+$index=array_search($maxlength, $lengths);
 
 //Действия с числами
 //Получить остаток деления 7 на 3
@@ -30,9 +34,6 @@ echo var_export(true == 1) . '<br>';
 //Правильно ли утверждение false тождественно 0
 echo var_export(falce === 0) . '<br>';
 //Какая строка длиннее three - три
-if ($three > $tri)
-  echo 'Строка "three" длиннее чем строка "три"' . '<br>';
-if ($three < $tri)
-  echo 'Строка "три" длиннее чем строка "three"' . '<br>';
+echo $databasearray[$index] . '<br>';
 //Какое число больше 125 умножить на 13 плюс 7 или 223 плюс 28 умножить 2
 echo '125*13+7=' . $a . ', а 223+28*2=' . $b . ', большим из этих чисел является ' . max($a, $b) . '<br>';
