@@ -1,59 +1,20 @@
 <?php
-$arr = [1, 2, 3, 7, 31, 4, 1, 8, 6];
+// Создать функцию определяющую какой тип данных ей передан и выводящей соответствующее сообщение.
+function dataType($a){
+    return gettype($a);
+ }
+echo dataType('50');
 
-//посчитать длину массива
-var_dump(count($arr));
-echo '<br />';
-
-// переместить первые 4 элемента массива в конец массива
-$count = 0;
-foreach ($arr as $key => $value) {
-  $arr[] = array_shift($arr);
-  $count++;
-  if ($count>=4) {
-    break;
-  }
+// Создать функцию которая считает все буквы b в переданной строке,
+// в случае если передается не строка функция должна возвращать false
+function bString($c){
+    $b = is_string($c) ? substr_count($c,'b') : "falce";
+    return $b;
 }
-var_dump($arr);
-echo '<br />';
+echo bString(432343);
 
-// получить сумму 4,5,6 элемента
-print_r($arr[3] + $arr[4] + $arr[5]);
-echo '<br />';
-
-$firstArr = [
-  'one' => 1,
-  'two' => 2,
-  'three' => 3,
-  'foure' => 5,
-  'five' => 12,
-];
-
-$secondArr = [
-  'one' => 1,
-  'seven' => 22,
-  'three' => 32,
-  'foure' => 5,
-  'five' => 13,
-  'six' => 37,
-];
-
-// найти все элементы которые отсутствуют в первом массиве и присутствуют во втором
-print_r(array_diff($secondArr, $firstArr));
-echo '<br />';
-
-// найти все элементы которые присутствую в первом и отсутствуют во втором
-print_r(array_diff($firstArr, $secondArr));
-echo '<br />';
-
-// найти все элементы значения которых совпадают
-print_r(array_intersect($firstArr, $secondArr));
-echo '<br />';
-
-// найти все элементы значения которых отличается
-var_dump(array_diff($firstArr, $secondArr), array_diff($secondArr, $firstArr));
-echo '<br />';
-
+// Создать функцию которая считает сумму
+// значений всех элементов массива произвольной глубины
 $thirdArr = [
   'one' => 1,
   'two' => [
@@ -73,22 +34,24 @@ $thirdArr = [
   ],
 ];
 
-// получить все вторые элементы вложенных массивов
-foreach($thirdArr as $key => $array) {
-  if(is_array($array)) {
-    $ar = array_values($array);
-    var_dump($ar[1]);
-  }
+function arraySum($arr) {
+    $sum = 0;
+    foreach($arr as $v) {
+        if (is_array($v)) {
+            $sum += arraySum($v);
+        } else {
+            $sum += $v;
+        }
+    }
+    return $sum;
 }
-echo '<br />';
+echo arraySum($thirdArr);
 
-// получить общее количество элементов в массиве
- echo count($thirdArr, COUNT_RECURSIVE);
- echo '<br />';
-
-// получить сумму всех значений в массиве
-$sum =0;
-array_walk_recursive($thirdArr, function($number) use (&$sum) {
-  $sum += $number;
-});
-echo $sum . '<br />';;
+// Создать функцию которая определит сколько квадратов меньшего размера можно вписать
+// в квадрат большего размера размер возвращать в float
+function square($g, $f ){
+  $s= ($g <= $f) ? pow($f, 2)/pow($g, 2) : pow($g, 2)/pow($f, 2);
+    return $s;
+}
+echo square(6, 9);
+?>
