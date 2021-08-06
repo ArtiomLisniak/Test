@@ -3,14 +3,14 @@
 // Класс должен содержать 2 свойства
 // Каждое свойство должно иметь геттеры и сеттеры
 
-abstract class ClassOne
+class ClassOne
 {
   public $propOne = 46;
   public $propTwo = 7;
 
   public function funClass(){
-    return $this -> propOne;
-    return $this -> propTwo;
+    return $this->propOne;
+    return $this->propTwo;
   }
 
   /**
@@ -18,15 +18,15 @@ abstract class ClassOne
    */
   public function getOne(): int
   {
-    return $this -> propOne;
+    return $this->propOne;
   }
 
   /**
    * @return int $propOne
    */
-  public function setOne(int $propOne): viod
+  public function setOne(int $propOne): void
   {
-    $this -> propOne = $propOne;
+    $this->propOne = $propOne;
   }
 
   /**
@@ -34,15 +34,15 @@ abstract class ClassOne
    */
   public function getTwo(): int
   {
-    return $this-> propTwo;
+    return $this->propTwo;
   }
 
   /**
-   * @return int $propOne
+   * @return int $propTwo
    */
-  public function setTwo(int $propOne): viod
+  public function setTwo(int $propOne): void
   {
-    $this -> propTwo = $propTwo;
+    $this->propTwo = $propTwo;
   }
 
 }
@@ -63,51 +63,57 @@ class ChildOne extends ClassOne
 
   public function funChOne()
   {
-    return $a+$propOne;
+    return $this->a+$this->propOne;
   }
   /**
    * @return int
    */
   public function getA(): int
   {
-    return $this -> a;
+    return $this->a;
   }
 
   /**
-   * @return int $propOne
+   * @return int $a
    */
-  public function setA(int $a): viod
+  public function setA(int $a): void
   {
-    $this -> a = $a;
+    $this->a = $a;
   }
 }
 
+$classObj = new ChildOne();
+echo $classObj->funChOne() . '<br />';
+
 // Второй наследник
 
-class ChildTwo extends ClassOne
+final class ChildTwo extends ClassOne
 {
-  private $b = 5;
+  public $b = 5;
 
-  private function funChTwo()
+  public function funChTwo()
   {
-    return $b+$propTwo;
+    return $this->b-$this->propTwo;
   }
   /**
    * @return int
    */
   public function getB(): int
   {
-    return $thisB -> b;
+    return $this->b;
   }
 
   /**
-   * @return int $propOne
+   * @return int $b
    */
-  public function setB(int $b): viod
+  public function setB(int $b): void
   {
-    $this -> b = $b;
+    $this->b = $b;
   }
 }
+
+$classObj = new ChildTwo();
+echo $classObj->funChTwo() . '<br />';
 
 // Третий наследник
 
@@ -115,25 +121,27 @@ abstract class ChildThree extends ClassOne
 {
   public $c = 12;
 
-  abstract public function square();
   public function funChThree()
   {
-    return $c*$propTwo;
+    return $this->c*$this->propOne;
   }
+
+  abstract public function square();
+
   /**
    * @return int
    */
   public function getC(): int
   {
-    return $this -> c;
+    return $this->c;
   }
 
   /**
-   * @return int $propOne
+   * @return int $c
    */
-  public function setC(int $c): viod
+  public function setC(int $c): void
   {
-    $this -> c = $c;
+    $this->c = $c;
   }
 }
 
@@ -153,27 +161,27 @@ class ChildOneFirst extends ChildOne
 
   public function funClassOneChOneFirst()
   {
-    return $d*$propOne;
+    return $this->d*$this->propOne;
   }
 
   public function funChOneFirst()
   {
-    return $d/$a;
+    return $this->d/$this->a;
   }
   /**
    * @return int
    */
   public function getD(): int
   {
-    return $this -> d;
+    return $this->d;
   }
 
   /**
-   * @return int $propOne
+   * @return int $d
    */
-  public function setD(int $d): viod
+  public function setD(int $d): void
   {
-    $this -> d = $d;
+    $this->d = $d;
   }
 }
 
@@ -184,30 +192,37 @@ class ChildOneSecond extends ChildOne
 
   public function funClassOneChOneSecond()
   {
-    return $e+$propTwo;
+    return $this->e+$this->propTwo;
   }
 
   public function funChOneSecond()
   {
-    return $e-$a;
+    return $this->e-$this->a;
   }
   /**
    * @return int
    */
   public function getE(): int
   {
-    return $this -> e;
+    return $this->e;
   }
 
   /**
-   * @return int $propOne
+   * @return int $e
    */
-  public function setE(int $e): viod
+  public function setE(int $e): void
   {
-    $this -> e = $e;
+    $this->e = $e;
   }
 }
 
+$classObj = new ChildOneFirst();
+echo $classObj->funClassOneChOneFirst() . '<br />';
+echo $classObj->funChOneFirst() . '<br />';
+
+$classObj = new ChildOneSecond();
+echo $classObj->funClassOneChOneSecond() . '<br />';
+echo $classObj->funChOneSecond() . '<br />';
 
 // Наследники от ВТОРОГО наследника первого уровня
 // я так понял их нет т.к. второй наследник не наследуемый
@@ -220,32 +235,32 @@ class ChildThreeFirst extends ChildThree
 
   public function square()
   {
-    return pow($h, 3);
+    return pow($this->h, 3);
   }
 
   public function funClassOneChTheeFirst()
   {
-    return $h*$propOne;
+    return $this->h*$this->propOne;
   }
 
   public function funChThreeFirst()
   {
-    return $h*$c;
+    return $this->h*$this->c;
   }
   /**
    * @return int
    */
   public function getH(): int
   {
-    return $this -> h;
+    return $this->h;
   }
 
   /**
    * @return int $h
    */
-  public function setH(int $h): viod
+  public function setH(int $h): void
   {
-    $this -> h = $h;
+    $this->h = $h;
   }
 }
 
@@ -256,36 +271,42 @@ class ChildThreeSecond extends ChildThree
 
   public function square()
   {
-    return pow($i, 2);
+    return pow($this->i, 2);
   }
 
   public function funClassOneChTheeSecond()
   {
-    return $i-$propTwo;
+    return $this->i-$this->propTwo;
   }
 
   public function funChThreeSecond()
   {
-    return $i-$c;
+    return $this->i-$this->c;
   }
   /**
    * @return int
    */
   public function getI(): int
   {
-    return $this -> i;
+    return $this->i;
   }
 
   /**
    * @return int $i
    */
-  public function setI(int $i): viod
+  public function setI(int $i): void
   {
-    $this -> i = $i;
+    $this->i = $i;
   }
 }
 
-$classObj = new ChildThreeSecond();
-echo $classObj -> getI();
+$classObj = new ChildThreeFirst();
+echo $classObj->square() . '<br />';
+echo $classObj->funClassOneChTheeFirst() . '<br />';
+echo $classObj->funChThreeFirst() . '<br />';
 
+$classObj = new ChildThreeSecond();
+echo $classObj->square() . '<br />';
+echo $classObj->funClassOneChTheeSecond() . '<br />';
+echo $classObj->funChThreeSecond() . '<br />';
 ?>
